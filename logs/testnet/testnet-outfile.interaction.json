@@ -1,0 +1,92 @@
+{
+    "emittedTransaction": {
+        "nonce": 1711,
+        "value": "0",
+        "receiver": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+        "sender": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
+        "gasPrice": 1000000000,
+        "gasLimit": 6000000,
+        "data": "dW5zdGFrZQ==",
+        "chainID": "T",
+        "version": 2,
+        "signature": "677e569e085f353fa16703a4ceab5c5363cc0bd78ecf8b55808b512441f89082a30e090467aa53ae38f791273242a51d40955718f92524661193b9997dcf0302"
+    },
+    "emittedTransactionData": "unstake",
+    "emittedTransactionHash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+    "contractAddress": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+    "transactionOnNetwork": {
+        "isCompleted": true,
+        "hash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+        "type": "normal",
+        "nonce": 1711,
+        "round": 2187745,
+        "epoch": 1821,
+        "value": "0",
+        "receiver": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+        "sender": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
+        "gasLimit": 6000000,
+        "gasPrice": 1000000000,
+        "data": "unstake",
+        "signature": "",
+        "status": "success",
+        "timestamp": 1685369670,
+        "blockNonce": 2185016,
+        "hyperblockNonce": 0,
+        "hyperblockHash": "",
+        "smartContractResults": [
+            {
+                "hash": "304ab34f2ab991c7c24f6d85f3d705a36965b0697a796ac2acb5a26df9a0c64a",
+                "nonce": 0,
+                "value": 1000000000000000000,
+                "receiver": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
+                "sender": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+                "data": "",
+                "previousHash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+                "originalHash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+                "gasLimit": 0,
+                "gasPrice": 1000000000,
+                "callType": 0,
+                "returnMessage": "",
+                "isRefund": false
+            },
+            {
+                "hash": "7a6fc5080ffb8ff27aa2ab5acd9694bc0ddf393431566d20c63aad90be41a724",
+                "nonce": 1712,
+                "value": 39664040000000,
+                "receiver": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
+                "sender": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+                "data": "@6f6b",
+                "previousHash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+                "originalHash": "77b8da7a7bbf6dd3abf7a12b56a49d66096ff84b5192d019f3d56ac37ad5b4a9",
+                "gasLimit": 0,
+                "gasPrice": 1000000000,
+                "callType": 0,
+                "returnMessage": "",
+                "isRefund": true
+            }
+        ],
+        "logs": {
+            "address": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+            "events": [
+                {
+                    "address": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+                    "identifier": "transferValueOnly",
+                    "topics": [
+                        "AAAAAAAAAAAFAET6F5OQkDbQ0D4w3kVRvXO4rGAEaeE=",
+                        "ATlHLv9ohncamC8wg9pdQh8kwpGB5jiIIo3IHKYNaeE=",
+                        "DeC2s6dkAAA="
+                    ],
+                    "data": ""
+                },
+                {
+                    "address": "erd1qqqqqqqqqqqqqpgqgnap0yusjqmdp5p7xr0y25dawwu2ccqyd8ss72ck5a",
+                    "identifier": "completedTxEvent",
+                    "topics": [
+                        "d7jaenu/bdOr96ErVqSdZglv+EtRktAZ89Vqw3rVtKk="
+                    ],
+                    "data": ""
+                }
+            ]
+        }
+    }
+}
