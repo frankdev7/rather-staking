@@ -23,3 +23,24 @@
     fn claim_rewards(&self) {
     }
 ```
+# MXPY CLI Docs
+[mxpy](https://github.com/multiversx/mx-sdk-py-cli/blob/main/CLI.md)
+## Buil Contract
+```sh
+mxpy contract build
+```
+
+
+
+# Tests
+
+RATE: 1000000000000000, STAKE: 3
+
+## Test 1
+LT: 1685560866
+CT: 1685561088
+Claimed: 0.22
+
+## Test 2
+LT: 1685561088
+CT: 

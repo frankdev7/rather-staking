@@ -18,6 +18,11 @@ pub trait RatherStakingContract {
         require!(payment_amount > 0, "Must pay more than 0");
 
         let caller = self.blockchain().get_caller();
+
+        let current_timestamp = self.blockchain().get_block_timestamp();
+        self.last_claim_timestamp(&caller)
+            .set(current_timestamp);
+
         self.staking_position(&caller)
             .update(|current_amount| *current_amount += payment_amount);
         self.staked_addresses().insert(caller);
@@ -29,7 +34,7 @@ pub trait RatherStakingContract {
         let stake_mapper = self.staking_position(&caller);
 
         let caller_stake = stake_mapper.get();
-        require(caller_stake > 0, "Must unstake more than 0");
+        require!(caller_stake > 0, "Must unstake more than 0");
 
         self.staked_addresses().swap_remove(&caller);
         stake_mapper.clear();
@@ -41,36 +46,29 @@ pub trait RatherStakingContract {
     fn claim_rewards(&self) {
         let caller = self.blockchain().get_caller();
 
-        let stake_mapper = self.staking_position(&caller);
-        let caller_stake = stake_mapper.get();
+        let caller_stake = self.staking_position(&caller).get();
+        require!(caller_stake > 0, "Need stake more than 0");
+
+        let current_timestamp = self.blockchain().get_block_timestamp();
+        let last_claim_timestamp = self.last_claim_timestamp(&caller).get();
 
         let total_stake = self.total_stake();
-
-        let reward_rate = self.reward_rate();
-        let time_increment = self.time_increment();
-
+        let reward_rate = self.reward_rate().get();
+        let time_increment = current_timestamp - last_claim_timestamp;
+        
         let total_rewards = reward_rate * time_increment;
         let caller_rewards = caller_stake * total_rewards / total_stake;
 
+        self.last_claim_timestamp(&caller).set(current_timestamp);
         self.send().direct_egld(&caller, &caller_rewards);
-    }
 
-    fn time_increment(&self) -> u64 {
-        let caller = self.blockchain().get_caller();
-
-        let current_timestamp = self.blockchain().get_block_timestamp();
-        let last_claim_timestamp = self.last_claim_timestamp(&caller);
-
-        self.last_claim_timestamp().set(current_timestamp);
-
-        current_timestamp - last_claim_timestamp
     }
 
     #[view(getTotalStake)]
     fn total_stake(&self) -> BigUint {
-        let total_stake = self.staked_addresses.iter().map(|address| {
-            self.staking_position(&address).get().sum()
-        });
+        let total_stake = self.staked_addresses().iter().map(|address| {
+            self.staking_position(&address).get()
+        }).fold(BigUint::zero(), |acc, x| acc + x);
         total_stake
     }
 
@@ -87,6 +85,6 @@ pub trait RatherStakingContract {
     fn reward_rate(&self) -> SingleValueMapper<u64>;
     
     #[view(getLastClaimTimestamp)]
-    #[storage_mapper("getLastClaimTimestamp")]
+    #[storage_mapper("lastClaimTimestamp")]
     fn last_claim_timestamp(&self, addr: &ManagedAddress) -> SingleValueMapper<u64>;
 }
