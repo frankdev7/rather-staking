@@ -18,50 +18,67 @@ pub trait RatherStakingContract {
         require!(payment_amount > 0, "Must pay more than 0");
 
         let caller = self.blockchain().get_caller();
-
         let current_timestamp = self.blockchain().get_block_timestamp();
-        self.last_claim_timestamp(&caller)
-            .set(current_timestamp);
 
+        self.last_claim_timestamp(&caller).set(&current_timestamp);
         self.staking_position(&caller)
             .update(|current_amount| *current_amount += payment_amount);
+        
         self.staked_addresses().insert(caller);
     }
 
     #[endpoint]
-    fn unstake(&self) {
+    fn unstake(&self, opt_unstake_amount: OptionalValue<BigUint>) {
         let caller = self.blockchain().get_caller();
         let stake_mapper = self.staking_position(&caller);
+        let unstake_amount = match opt_unstake_amount {
+            OptionalValue::Some(amt) => amt,
+            OptionalValue::None => stake_mapper.get(),
+        };
+        
+        let remaining_stake = stake_mapper.update(|staked_amount| {
+            require!(
+                unstake_amount > 0 && unstake_amount <= *staked_amount,
+                "Invalid unstake amount"
+            );
+            *staked_amount -= &unstake_amount;
+    
+            staked_amount.clone()
+        });
 
-        let caller_stake = stake_mapper.get();
-        require!(caller_stake > 0, "Must unstake more than 0");
+        if remaining_stake == 0 {
+            self.staked_addresses().swap_remove(&caller);
+        }
 
-        self.staked_addresses().swap_remove(&caller);
-        stake_mapper.clear();
-
-        self.send().direct_egld(&caller, &caller_stake);
+        self.send().direct_egld(&caller, &unstake_amount);
     }
 
     #[endpoint(claimRewards)]
     fn claim_rewards(&self) {
         let caller = self.blockchain().get_caller();
+        let current_timestamp = self.blockchain().get_block_timestamp();
 
         let caller_stake = self.staking_position(&caller).get();
         require!(caller_stake > 0, "Need stake more than 0");
 
-        let current_timestamp = self.blockchain().get_block_timestamp();
-        let last_claim_timestamp = self.last_claim_timestamp(&caller).get();
+        let caller_rewards: BigUint = self.calculate_rewards(&caller, &caller_stake, &current_timestamp);
 
-        let total_stake = self.total_stake();
-        let reward_rate = self.reward_rate().get();
-        let time_increment = current_timestamp - last_claim_timestamp;
-        
-        let total_rewards = reward_rate * time_increment;
-        let caller_rewards = caller_stake * total_rewards / total_stake;
+        if caller_rewards > BigUint::zero() {
+            self.last_claim_timestamp(&caller).set(current_timestamp);
+            self.send().direct_egld(&caller, &caller_rewards);
+        }
+    }
 
-        self.last_claim_timestamp(&caller).set(current_timestamp);
-        self.send().direct_egld(&caller, &caller_rewards);
+    fn calculate_rewards(&self, caller: &ManagedAddress, caller_stake: &BigUint, current_timestamp: &u64) -> BigUint {
+        let last_claim_timestamp: u64 = self.last_claim_timestamp(caller).get();
 
+        let total_stake: BigUint = self.total_stake().clone();
+        let reward_rate: BigUint = BigUint::from(self.reward_rate().get());
+        let time_increment: BigUint = BigUint::from(*current_timestamp-last_claim_timestamp);
+
+        let total_rewards: BigUint  = time_increment.mul(&reward_rate);
+        let caller_rewards: BigUint = caller_stake * &total_rewards / &total_stake;
+        caller_rewards
     }
 
     #[view(getTotalStake)]
