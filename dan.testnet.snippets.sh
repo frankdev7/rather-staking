@@ -1,10 +1,10 @@
 PROJECT="/Users/frank/Documents/blockchain/rust/multiversx/rather-staking"
-WALLET_PEM="/Users/frank/multiversx-sdk/testwallets/latest/users/alice.pem"
+WALLET_PEM="/Users/frank/multiversx-sdk/testwallets/latest/users/dan.pem"
 DEPLOY_OUTFILE="./logs/testnet/testnet-deploy-outfile.interaction.json"
-ARGUMENT_U64_REWARD_RATE=1000000000000000
-VALUE=2000000000000000000
+ARGUMENT_U64_REWARD_RATE=10000000000000000
+VALUE=3000000000000000000
 VALUE_UNSTAKE=1000000000000000000
-OWNER_ADDRESS="erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th"
+OWNER_ADDRESS="erd1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx"
 CONTRACT_ADDRESS=$(mxpy data load --key=contract-address-testnet)
 OUTFILE="./logs/testnet/testnet-outfile.interaction.json"
 
@@ -87,7 +87,7 @@ getLastClaimTimestampEndpoint() {
 ##
 
 # deploySC
-# stakeEndpoint
+stakeEndpoint
 # unstakeEndpoint
 # claimRewardsEndpoint
 

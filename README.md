@@ -1,8 +1,16 @@
 # Rather Staking
 
 # Testnet Multiversx
+Smart Contract Address:
 ```sh
+erd1qqqqqqqqqqqqqpgqqnut3tcgceta6527y5msuccg5wgfqx60d8ssescs4z
+```
 
+Wallets:
+```javascript
+- Alice.pem
+- Carol.pem
+- Dan.pem
 ```
 # MXPY CLI Docs
 [mxpy](https://github.com/multiversx/mx-sdk-py-cli/blob/main/CLI.md)
