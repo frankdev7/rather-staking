@@ -15,7 +15,12 @@ pub trait RatherStakingContract {
     #[endpoint]
     fn stake(&self) {
         let payment_amount = self.call_value().egld_value().clone_value();
+
         require!(payment_amount > 0, "Must pay more than 0");
+
+        // update total stake
+        let stake_amount = self.call_value().egld_value().clone_value();
+        self.total_stake().update(|total_stake| *total_stake += stake_amount);
 
         let caller = self.blockchain().get_caller();
         let current_timestamp = self.blockchain().get_block_timestamp();
@@ -50,6 +55,9 @@ pub trait RatherStakingContract {
             self.staked_addresses().swap_remove(&caller);
         }
 
+        // update total stake
+        self.total_stake().update(|total_stake| *total_stake -= &unstake_amount);
+        
         self.send().direct_egld(&caller, &unstake_amount);
     }
 
@@ -72,21 +80,13 @@ pub trait RatherStakingContract {
     fn calculate_rewards(&self, caller: &ManagedAddress, caller_stake: &BigUint, current_timestamp: &u64) -> BigUint {
         let last_claim_timestamp: u64 = self.last_claim_timestamp(caller).get();
 
-        let total_stake: BigUint = self.total_stake().clone();
+        let total_stake: BigUint = self.total_stake().get();
         let reward_rate: BigUint = BigUint::from(self.reward_rate().get());
         let time_increment: BigUint = BigUint::from(*current_timestamp-last_claim_timestamp);
 
         let total_rewards: BigUint  = time_increment.mul(&reward_rate);
         let caller_rewards: BigUint = caller_stake * &total_rewards / &total_stake;
         caller_rewards
-    }
-
-    #[view(getTotalStake)]
-    fn total_stake(&self) -> BigUint {
-        let total_stake = self.staked_addresses().iter().map(|address| {
-            self.staking_position(&address).get()
-        }).fold(BigUint::zero(), |acc, x| acc + x);
-        total_stake
     }
 
     #[view(getStakedAddresses)]
@@ -100,6 +100,10 @@ pub trait RatherStakingContract {
     #[view(getRewardRate)]
     #[storage_mapper("rewardRate")]
     fn reward_rate(&self) -> SingleValueMapper<u64>;
+
+    #[view(getTotalStake)]
+    #[storage_mapper("totalStake")]
+    fn total_stake(&self) -> SingleValueMapper<BigUint>;
     
     #[view(getLastClaimTimestamp)]
     #[storage_mapper("lastClaimTimestamp")]

@@ -21,10 +21,10 @@ multiversx_sc_wasm_adapter::endpoints! {
         stake
         unstake
         claimRewards
-        getTotalStake
         getStakedAddresses
         getStakingPosition
         getRewardRate
+        getTotalStake
         getLastClaimTimestamp
     )
 }
