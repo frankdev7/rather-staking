@@ -1,63 +1,48 @@
 {
     "emittedTransaction": {
-        "nonce": 1981,
-        "value": "0",
-        "receiver": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+        "nonce": 1984,
+        "value": "2000000000000000000",
+        "receiver": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
         "sender": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
         "gasPrice": 1000000000,
         "gasLimit": 6000000,
-        "data": "Y2xhaW1SZXdhcmRz",
+        "data": "c3Rha2U=",
         "chainID": "T",
         "version": 2,
-        "signature": "ed69919987e7259d9d44e4cf446906bb7d4888b672e8a1bd6a7ed534c49148762064b9599399c5c081ff1ae8bba219ac984eac1f37b11366c4356e310a403104"
+        "signature": "643d446ea4906f56f7ba84d0677857ee42c422071a845b8825a2472d1a73717fb20eae50fb92b5a6a4e38a451f001116c8876179ba922b99828b610cab7a780e"
     },
-    "emittedTransactionData": "claimRewards",
-    "emittedTransactionHash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
-    "contractAddress": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+    "emittedTransactionData": "stake",
+    "emittedTransactionHash": "46b90af2efbc446b0446f40077ed2d210ab4ac44378196eea5ee0a6b3e5577db",
+    "contractAddress": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
     "transactionOnNetwork": {
         "isCompleted": true,
-        "hash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
+        "hash": "46b90af2efbc446b0446f40077ed2d210ab4ac44378196eea5ee0a6b3e5577db",
         "type": "normal",
-        "nonce": 1981,
-        "round": 2332611,
-        "epoch": 1942,
-        "value": "0",
-        "receiver": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+        "nonce": 1984,
+        "round": 2333869,
+        "epoch": 1943,
+        "value": "2000000000000000000",
+        "receiver": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
         "sender": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
         "gasLimit": 6000000,
         "gasPrice": 1000000000,
-        "data": "claimRewards",
+        "data": "stake",
         "signature": "",
         "status": "success",
-        "timestamp": 1686238866,
-        "blockNonce": 2329756,
+        "timestamp": 1686246414,
+        "blockNonce": 2331014,
         "hyperblockNonce": 0,
         "hyperblockHash": "",
         "smartContractResults": [
             {
-                "hash": "4d01dbb04e20e289d582e4e55605e6e56df3115bddfca2552ce1d084f8bff4cf",
-                "nonce": 0,
-                "value": 360000000000000000,
+                "hash": "9e2ac053fcb4d9e51be9b5fd6be18986ec90857e8b0581d84e9ddf06058d4eb0",
+                "nonce": 1985,
+                "value": 35060430000000,
                 "receiver": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
-                "sender": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
-                "data": "",
-                "previousHash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
-                "originalHash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
-                "gasLimit": 0,
-                "gasPrice": 1000000000,
-                "callType": 0,
-                "returnMessage": "",
-                "isRefund": false
-            },
-            {
-                "hash": "4ecb27bafbcde72b2eaabef71b193c3038c529979bc989ef8fb6f835d8091e7f",
-                "nonce": 1982,
-                "value": 40795800000000,
-                "receiver": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
-                "sender": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+                "sender": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
                 "data": "@6f6b",
-                "previousHash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
-                "originalHash": "979ca0d03f10fa0e0ded68c16819894647eb51eb5dee82d835ad7460cd488930",
+                "previousHash": "46b90af2efbc446b0446f40077ed2d210ab4ac44378196eea5ee0a6b3e5577db",
+                "originalHash": "46b90af2efbc446b0446f40077ed2d210ab4ac44378196eea5ee0a6b3e5577db",
                 "gasLimit": 0,
                 "gasPrice": 1000000000,
                 "callType": 0,
@@ -66,23 +51,13 @@
             }
         ],
         "logs": {
-            "address": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+            "address": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
             "events": [
                 {
-                    "address": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
-                    "identifier": "transferValueOnly",
-                    "topics": [
-                        "AAAAAAAAAAAFAMfskaP4dj5pl9ZyeLCEp1eHFMueaeE=",
-                        "ATlHLv9ohncamC8wg9pdQh8kwpGB5jiIIo3IHKYNaeE=",
-                        "BP76F7ckAAA="
-                    ],
-                    "data": ""
-                },
-                {
-                    "address": "erd1qqqqqqqqqqqqqpgqclkfrglcwclxn97kwfutpp9827r3fju7d8ssdtsxmm",
+                    "address": "erd1qqqqqqqqqqqqqpgqq2kec8mvytknc3wad2pq0lvyqpsmp7lkd8ssrdhyny",
                     "identifier": "completedTxEvent",
                     "topics": [
-                        "l5yg0D8Q+g4N7WjBaBmJRkfrUetd7oLYNa10YM1IiTA="
+                        "RrkK8u+8RGsERvQAd+0tIQq0rEQ3gZbupe4Kaz5Vd9s="
                     ],
                     "data": ""
                 }

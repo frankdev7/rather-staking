@@ -18,7 +18,10 @@ Wallets:
 ```sh
 mxpy contract build
 ```
-
+# Test Contract
+```sh
+cargo test --test empty_rust_test
+```
 # Deploy, Call and Views
 ```sh
 ##

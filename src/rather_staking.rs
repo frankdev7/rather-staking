@@ -1,6 +1,13 @@
 #![no_std]
 
 multiversx_sc::imports!();
+multiversx_sc::derive_imports!();
+
+#[derive(TypeAbi, TopEncode, TopDecode, PartialEq, Debug)]
+pub struct StakingPosition<M: ManagedTypeApi> {
+    pub stake_amount: BigUint<M>,
+    pub start_timestamp: u64,
+}
 
 /// An empty contract. To be used as a template when starting a new contract from scratch.
 #[multiversx_sc::contract]
@@ -22,10 +29,18 @@ pub trait RatherStakingContract {
         let stake_amount = self.call_value().egld_value().clone_value();
         self.total_stake().update(|total_stake| *total_stake += stake_amount);
 
+        let stake_position = self.call_value().egld_value().clone_value();
         let caller = self.blockchain().get_caller();
         let current_timestamp = self.blockchain().get_block_timestamp();
 
-        self.last_claim_timestamp(&caller).set(&current_timestamp);
+        let staking_position = StakingPosition {
+            stake_amount: stake_position,
+            start_timestamp: current_timestamp,
+        };
+        self.staking_positions(&caller).push(&staking_position);
+
+        // self.last_claim_timestamp(&caller).set(&current_timestamp);
+
         self.staking_position(&caller)
             .update(|current_amount| *current_amount += payment_amount);
         
@@ -96,6 +111,13 @@ pub trait RatherStakingContract {
     #[view(getStakingPosition)]
     #[storage_mapper("stakingPosition")]
     fn staking_position(&self, addr: &ManagedAddress) -> SingleValueMapper<BigUint>;
+
+    #[view(getStakingPositions)]
+    #[storage_mapper("stakingPositions")]
+    fn staking_positions(
+        &self,
+        addr: &ManagedAddress,
+    ) -> VecMapper<StakingPosition<Self::Api>>;
 
     #[view(getRewardRate)]
     #[storage_mapper("rewardRate")]
